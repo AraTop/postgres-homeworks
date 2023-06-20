@@ -35,12 +35,13 @@ ORDER BY total_weight DESC
 
 SELECT country
 FROM (
-   SELECT country FROM customers
-   UNION
-   SELECT country FROM suppliers
-   UNION
-   SELECT country FROM employees
+    SELECT country FROM customers
+    INTERSECT
+    SELECT country FROM suppliers
+    EXCEPT
+    SELECT country FROM employees
 ) AS combined
+GROUP BY country;
 
 -- 7. страны, в которых зарегистрированы и заказчики (customers) и поставщики (suppliers), но не зарегистрированы работники (employees).
 
